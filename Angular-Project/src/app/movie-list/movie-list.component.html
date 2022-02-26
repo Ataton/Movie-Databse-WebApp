@@ -1,0 +1,75 @@
+<div class='card'>
+  <div class='card-header'>
+    Top Movies
+  </div>
+  <div class='card-body'>
+    <div class="form-group">
+      <div class="form-group">
+
+        <div class="input-group mb-3">
+          <input type="text" [(ngModel)]='movieFilter' (keydown.enter)="performFilter()" class="form-control" placeholder="Find me" aria-label="Find Me"
+            aria-describedby="button-addon2">
+          <button class="btn btn-primary" type="button" id="button-addon2" (click)="performFilter()">Searching for  {{movieFilter}}</button>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+
+    </div>
+    <div class='table-responsive'>
+      <table class='table' >
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Release Date</th>
+            <th>Language</th>
+            <th>Movie ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let movie of filteredMovieDB'>
+
+            <td> {{ movie.title }} </td>
+            <td> {{ movie.popularity | number: '1.0-0'}} </td>
+            <td> {{ movie.release_date }} </td>
+            <td> {{ movie.original_language | uppercase }} </td>
+            <td> {{ movie.id }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class="card center_div">
+
+  <ul class="pagination pagination-lg ">
+    <li class="page-item">
+      <a class="page-link" href="#" (click)='changePageDn()'>&laquo;</a>
+    </li>
+    <li class="page-item ">
+      <a class="page-link" href="#" *ngIf="currentPage-1 >1" (click)='changePageDn();changePageDn()'>{{currentPage - 2
+        }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" *ngIf="currentPage>1" (click)='changePageDn()'>{{currentPage - 1 }}</a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" href="#">{{currentPage}}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" (click)='changePageUp()'>{{currentPage + 1 }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" (click)='changePageUp();changePageUp()'>{{currentPage + 2 }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" (click)='changePageUp()'>&raquo;</a>
+    </li>
+  </ul>
+
+</div>
